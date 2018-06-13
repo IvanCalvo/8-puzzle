@@ -28,9 +28,14 @@ void imprime_matriz(int** matriz){
 
 int verifica_vetor(int* vetor, int num){
 	int i, verifica;
-	verifica = 1;
-	if((vetor[num] = num)&&num!=0){
-		verifica = 0;
+	int count_0 = 0;
+	verifica = 0;
+	if(count_0==0 && num ==0){
+		count_0++;
+		verifica = 1;
+	}
+	if((vetor[num] != num)){
+		verifica = 1;
 	}
 	return verifica;
 }
@@ -46,9 +51,10 @@ int** cria_jogo(int** matriz){
 	for(i=0; i<3; i++){
 		for(j=0; j<3; j++){
 			do{
-				num = (rand()%8)+1;
+				num = (rand()%9);
 				verif = verifica_vetor(vet_num, num);
-				if(verif = 1){
+				printf("%d ", verif);
+				if(verif==1){
 					matriz[i][j] = num;
 					vet_num[num] = num;
 					verif=2;
