@@ -79,6 +79,19 @@ int** cria_jogo(int** matriz){
 	return matriz;
 }
 
+int compara(int** a, int** b){
+	int x, i, j;
+	x=1;
+	for(i=0; i<3; i++){
+		for(j=0; j<3; j++){
+			if(a[i][j]!=b[i][j]){
+				x=0;
+			}
+		}
+	}
+	return x;
+}
+
 int main(){
 	srand(time(NULL));
 	int** jogo = aloca_matriz(3, 3);
