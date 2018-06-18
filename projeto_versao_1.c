@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-int** aloca_matriz(int lin, int col){ 
+int** aloca_matriz(int lin, int col){
+	//cria uma nova matriz e preenche com 0
 	int i, j;
 	int **matriz = (int**)malloc(lin * sizeof(int*));
  
@@ -27,6 +28,9 @@ void imprime_matriz(int** matriz){
 }
 
 int verifica_vetor(int* vetor, int num){
+	//função que verifica se um numero já foi inserido
+	/*a função recebe o vetor e o numero para ser procurado, caso esse numero seja encontrado
+	significa que o número já foi inserido na matriz, portanto a função retorna 1 indicando a repetição*/
 	int i, verifica;
 	int c = 0;
 	verifica = 0;
@@ -40,7 +44,7 @@ int verifica_vetor(int* vetor, int num){
 	return verifica;
 }
 
-int** cria_resposta(int** m_resposta){
+int** cria_resposta(int** m_resposta){//matriz da resposta ideal para o jogo
 	int i, j;
 	int x=0;
 	m_resposta[0][0] = 1;
@@ -55,23 +59,25 @@ int** cria_resposta(int** m_resposta){
 	return m_resposta;
 }
 
-int** cria_jogo(int** matriz){
+int** cria_jogo(int** matriz){//cria uma matriz aleatória sem repetições, seguindo o padrão do jogo
 	srand(time(NULL));
 	int i, j, num;
 	int verif=0;
 	int *vet_num = (int*) malloc(9 * sizeof(int));
-	for(i=0; i<9; i++){
+	for(i=0; i<9; i++){//preenche o vetor com 0
 		vet_num[i] = 0; 
 	}
 	for(i=0; i<3; i++){
 		for(j=0; j<3; j++){
 			do{
 				num = (rand()%9);
-				verif = verifica_vetor(vet_num, num);
+				verif = verifica_vetor(vet_num, num);//chama a função para verificar se o número é repetido ou não
 				if(verif==1){
 					matriz[i][j] = num;
 					vet_num[num] = num;
 					verif=2;
+					//caso o numero não seja repetido, ele é colocado na matriz, e 
+					//também no vetor que armazena os números já inseridos
 				}
 			}while(verif!=2);
 		}
