@@ -81,13 +81,17 @@ int** cria_jogo(int** matriz){//cria uma matriz aleatória sem repetições, seguin
 	for(i=0; i<3; i++){
 		for(j=0; j<3; j++){
 			do{
-				num = (rand()%9);
-				if(num==0){
-					quant_zero++;
-				}
-				verif = verifica_vetor(vet_num, num);//chama a função para verificar se o número é repetido ou não
-				if(quant_zero>1){
-					verif--;
+				while(verif!=1){
+					num = (rand()%9);
+					if(num==0){
+						quant_zero++;
+					}
+					verif = verifica_vetor(vet_num, num);//chama a função para verificar se o número é repetido ou não
+					if(quant_zero>1){
+						verif--;
+					}
+					printf("%d\n", num);
+					verif = verifica_vetor(vet_num, num);
 				}
 				if(verif==1){
 					matriz[i][j] = num;
